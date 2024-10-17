@@ -1,6 +1,6 @@
 const Header = ({ searchQuery, setSearchQuery }) => {
     const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);  // Обновляем состояние фильтрации
+        setSearchQuery(e.target.value);  
     };
 
     return (

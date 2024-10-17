@@ -5,7 +5,7 @@ import Cart from './components/Cart';
 
 import './style.css';
 
-// Инициализируем редуктор для управления корзиной
+
 const cartReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TO_CART': {
@@ -26,7 +26,7 @@ const cartReducer = (state, action) => {
                 if (updatedCart[action.payload.index].quantity > 1) {
                     updatedCart[action.payload.index].quantity -= 1;
                 } else {
-                    // Если количество 1 и нажимают уменьшить, удаляем товар
+             
                     updatedCart.splice(action.payload.index, 1);
                 }
             }
@@ -40,17 +40,17 @@ const cartReducer = (state, action) => {
 const App = () => {
     const [products, setProducts] = useState([]);
     const [cart, dispatchCart] = useReducer(cartReducer, []);
-    const [searchQuery, setSearchQuery] = useState('');  // Стейт для хранения строки поиска
+    const [searchQuery, setSearchQuery] = useState('');  
 
-    // Загружаем корзину из localStorage при первом рендере
+  
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem('cart'));
         if (savedCart) {
             dispatchCart({ type: 'SET_CART', payload: savedCart });
         }
-    }, []);  // Загружаем корзину только один раз при первом рендере
+    }, []);  
 
-    // Загружаем список продуктов при первом рендере
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -62,23 +62,23 @@ const App = () => {
             }
         };
         fetchProducts();
-    }, []);  // Загружаем продукты один раз при первом рендере
+    }, []);  
 
-    // Сохраняем корзину в localStorage каждый раз, когда она изменяется
+
     useEffect(() => {
         if (cart.length > 0) {
             localStorage.setItem('cart', JSON.stringify(cart));
         } else {
-            localStorage.removeItem('cart');  // Если корзина пуста, удаляем из localStorage
+            localStorage.removeItem('cart');  
         }
-    }, [cart]);  // Этот эффект сработает каждый раз, когда изменится корзина
+    }, [cart]);  
 
-    // Фильтрация продуктов на основе поискового запроса
+
     const filteredProducts = products.filter(product => 
         product.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Ограничиваем количество отображаемых продуктов до 10
+
     const productsToDisplay = filteredProducts.length > 0 ? filteredProducts.slice(0, 10) : products.slice(0, 10);
 
     return (
@@ -87,7 +87,7 @@ const App = () => {
             <main>
                 <div className="container">
                     <section>
-                        {productsToDisplay.map((product) => ( // Отображаем только 10 продуктов
+                        {productsToDisplay.map((product) => ( 
                             <ProductCard 
                                 key={product.id} 
                                 product={product} 

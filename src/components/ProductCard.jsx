@@ -11,8 +11,8 @@ const ProductCard = ({ product, addToCart }) => {
         if (quantity > 1) setQuantity(prev => prev - 1);
     };
 
-    // Преобразуем стоимость в число и проверяем, что это число
-    const productPrice = parseFloat(product.price);  // Убедимся, что используем price
+
+    const productPrice = parseFloat(product.price); 
     const formattedPrice = isNaN(productPrice) ? 'Цена не указана' : `${productPrice.toFixed(2)}₽`;
 
     return (

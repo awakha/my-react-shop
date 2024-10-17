@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 const Cart = ({ cartItems, updateCart }) => {
     const [totalAmount, setTotalAmount] = useState(0);
 
-    // Пересчитываем итоговую сумму, когда cartItems изменяется
     useEffect(() => {
         if (cartItems.length > 0) {
             const newTotal = cartItems.reduce((acc, item) => {
@@ -18,7 +17,7 @@ const Cart = ({ cartItems, updateCart }) => {
             }, 0);
             setTotalAmount(newTotal);
         } else {
-            setTotalAmount(0); // Сбрасываем сумму, если корзина пуста
+            setTotalAmount(0); 
         }
     }, [cartItems]);
 
@@ -30,7 +29,7 @@ const Cart = ({ cartItems, updateCart }) => {
             ) : (
                 <div id="cart-items">
                     {cartItems.map((item, index) => {
-                        const price = parseFloat(item.cost); // Используем поле cost
+                        const price = parseFloat(item.cost);
                         const quantity = parseInt(item.quantity, 10);
                         const itemTotal = !isNaN(price) && !isNaN(quantity) ? price * quantity : 0;
                         return (
